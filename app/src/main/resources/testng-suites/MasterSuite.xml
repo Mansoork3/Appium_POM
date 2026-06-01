@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    MasterSuite.xml
+    ═══════════════
+    Runs ALL test classes.
+    All 8 listeners are active.
+    Use this for a full regression run.
+
+    Run via Gradle:
+        ./gradlew masterSuite
+    or
+        ./gradlew test
+-->
+
+<suite name="Sauce Demo – Master Suite" verbose="2" parallel="none">
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 8 LISTENERS                                         -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <listeners>
+        <listener class-name="com.saucedemo.listeners.ExtentReportListener"/>
+        <listener class-name="com.saucedemo.listeners.ScreenshotListener"/>
+
+        <listener class-name="com.saucedemo.listeners.VideoRecordingListener"/>
+        <listener class-name="com.saucedemo.listeners.TestLogListener"/>
+        <listener class-name="com.saucedemo.listeners.SuiteListener"/>
+        <listener class-name="com.saucedemo.listeners.TestTimingListener"/>
+        <listener class-name="com.saucedemo.listeners.NegativeTestListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- LOGIN TESTS                                         -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <test name="Login Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="login"/>
+                <include name="negative"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- PRODUCT TESTS                                       -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <test name="Product Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="product"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.ProductTest"/>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- CART TESTS                                          -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <test name="Cart Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="cart"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.CartTest"/>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- LOGOUT TESTS                                        -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <test name="Logout Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="logout"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.LogoutTest"/>
+        </classes>
+    </test>
+
+</suite>

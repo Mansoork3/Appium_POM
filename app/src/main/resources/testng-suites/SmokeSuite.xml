@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    SmokeSuite.xml
+    ══════════════
+    Smoke tests only – a fast sanity check after each build.
+    Includes only tests marked with group="smoke".
+
+    Run via Gradle:
+        ./gradlew smokeSuite
+-->
+
+<suite name="Sauce Demo – Smoke Suite" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="com.saucedemo.listeners.ExtentReportListener"/>
+        <listener class-name="com.saucedemo.listeners.ScreenshotListener"/>
+        <listener class-name="com.saucedemo.listeners.VideoRecordingListener"/>
+        <listener class-name="com.saucedemo.listeners.TestLogListener"/>
+        <listener class-name="com.saucedemo.listeners.SuiteListener"/>
+        <listener class-name="com.saucedemo.listeners.TestTimingListener"/>
+
+        <listener class-name="com.saucedemo.listeners.NegativeTestListener"/>
+    </listeners>
+
+    <test name="Smoke Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.LoginTest"/>
+            <class name="com.saucedemo.tests.ProductTest"/>
+            <class name="com.saucedemo.tests.CartTest"/>
+            <class name="com.saucedemo.tests.LogoutTest"/>
+        </classes>
+    </test>
+
+</suite>

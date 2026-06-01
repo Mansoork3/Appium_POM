@@ -1,0 +1,30 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+local.properties
+
+# Reports (generated at runtime – do NOT commit)
+reports/extent-report/*.html
+reports/screenshots/passed/*.png
+reports/screenshots/failed/*.png
+reports/videos/passed/*.mp4
+reports/videos/failed/*.mp4
+reports/logs/execution.log
+reports/test-output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Java compiled output
+*.class
+
+# Gradle wrapper jar (keep properties, ignore jar)
+gradle/wrapper/gradle-wrapper.jar

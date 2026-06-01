@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    LoginSuite.xml
+    ══════════════
+    Runs ONLY the login tests (positive + all negative).
+    Use this when you are working specifically on authentication.
+
+    Run via Gradle:
+        ./gradlew loginSuite
+-->
+
+<suite name="Sauce Demo – Login Suite" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="com.saucedemo.listeners.ExtentReportListener"/>
+        <listener class-name="com.saucedemo.listeners.ScreenshotListener"/>
+        <listener class-name="com.saucedemo.listeners.VideoRecordingListener"/>
+        <listener class-name="com.saucedemo.listeners.TestLogListener"/>
+        <listener class-name="com.saucedemo.listeners.SuiteListener"/>
+        <listener class-name="com.saucedemo.listeners.TestTimingListener"/>
+
+        <listener class-name="com.saucedemo.listeners.NegativeTestListener"/>
+    </listeners>
+
+    <!-- Positive login test -->
+    <test name="Login – Positive" preserve-order="true">
+        <groups>
+            <run>
+                <include name="login"/>
+                <exclude name="negative"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <!-- Negative login tests -->
+    <test name="Login – Negative" preserve-order="true">
+        <groups>
+            <run>
+                <include name="negative"/>
+                <include name="login"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.LoginTest"/>
+        </classes>
+    </test>
+
+</suite>

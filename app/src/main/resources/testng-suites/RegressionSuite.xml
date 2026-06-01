@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    RegressionSuite.xml
+    ═══════════════════
+    Full regression – runs ALL tests tagged with group="regression".
+    Use this before every release.
+
+    Run via Gradle:
+        ./gradlew regressionSuite
+-->
+
+<suite name="Sauce Demo – Regression Suite" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="com.saucedemo.listeners.ExtentReportListener"/>
+        <listener class-name="com.saucedemo.listeners.ScreenshotListener"/>
+        <listener class-name="com.saucedemo.listeners.VideoRecordingListener"/>
+        <listener class-name="com.saucedemo.listeners.TestLogListener"/>
+        <listener class-name="com.saucedemo.listeners.SuiteListener"/>
+        <listener class-name="com.saucedemo.listeners.TestTimingListener"/>
+
+        <listener class-name="com.saucedemo.listeners.NegativeTestListener"/>
+    </listeners>
+
+    <test name="Regression – Login" preserve-order="true">
+        <groups>
+            <run>
+                <include name="regression"/>
+                <include name="login"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="Regression – Product" preserve-order="true">
+        <groups>
+            <run>
+                <include name="regression"/>
+                <include name="product"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.ProductTest"/>
+        </classes>
+    </test>
+
+    <test name="Regression – Cart" preserve-order="true">
+        <groups>
+            <run>
+                <include name="regression"/>
+                <include name="cart"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.CartTest"/>
+        </classes>
+    </test>
+
+    <test name="Regression – Logout" preserve-order="true">
+        <groups>
+            <run>
+                <include name="regression"/>
+                <include name="logout"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.saucedemo.tests.LogoutTest"/>
+        </classes>
+    </test>
+
+</suite>

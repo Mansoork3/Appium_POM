@@ -1,0 +1,115 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.saucedemo'
+version = '1.0.0'
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+
+    implementation 'io.appium:java-client:8.6.0'
+
+    implementation 'org.seleniumhq.selenium:selenium-java:4.13.0'
+
+    implementation 'org.testng:testng:7.8.0'
+
+    implementation 'com.aventstack:extentreports:5.1.1'
+
+    implementation 'com.github.stephenc.monte:monte-screen-recorder:0.7.7.0'
+
+    implementation 'commons-io:commons-io:2.13.0'
+
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+}
+// -------------------------------------------------------
+// Tell Java compiler where sources and resources live
+// (Android Studio "main" source set)
+// -------------------------------------------------------
+sourceSets {
+    main {
+        java {
+            srcDirs = ['app/src/main/java']
+        }
+        resources {
+            srcDirs = ['app/src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['app/src/main/java']
+        }
+        resources {
+            srcDirs = ['app/src/main/resources']
+        }
+    }
+}
+
+// -------------------------------------------------------
+// Compile everything (tests live in main source set for
+// Android Studio compatibility)
+// -------------------------------------------------------
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+// -------------------------------------------------------
+// TestNG tasks – one per suite
+// -------------------------------------------------------
+task masterSuite(type: Test) {
+    useTestNG {
+        suites 'app/src/main/resources/testng-suites/MasterSuite.xml'
+    }
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        showStandardStreams = true
+    }
+}
+
+task smokeSuite(type: Test) {
+    useTestNG {
+        suites 'app/src/main/resources/testng-suites/SmokeSuite.xml'
+    }
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        showStandardStreams = true
+    }
+}
+
+task regressionSuite(type: Test) {
+    useTestNG {
+        suites 'app/src/main/resources/testng-suites/RegressionSuite.xml'
+    }
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        showStandardStreams = true
+    }
+}
+
+task loginSuite(type: Test) {
+    useTestNG {
+        suites 'app/src/main/resources/testng-suites/LoginSuite.xml'
+    }
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        showStandardStreams = true
+    }
+}
+
+// Default test task runs master suite
+test {
+    useTestNG {
+        suites 'app/src/main/resources/testng-suites/MasterSuite.xml'
+    }
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        showStandardStreams = true
+    }
+}
