@@ -27,4 +27,4 @@ Thumbs.db
 *.class
 
 # Gradle wrapper jar (keep properties, ignore jar)
-gradle/wrapper/gradle-wrapper.jar
+
